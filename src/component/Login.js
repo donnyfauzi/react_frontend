@@ -1,13 +1,7 @@
-import React, { useState } from "react"
+import React from 'react';
 import './Login.css'
 
 const Login = () => {
-//     const [isMobile, setIsMobile] = useState(false);
-
-    // const toggleNavbar = () => {
-    //     setIsMobile(!isMobile)
-    // }
-
     return (
     <div className="main">  	
         <input type="checkbox" id="chk" aria-hidden="true" />
