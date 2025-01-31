@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import '../styles/Register.css';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/registerLogin.css";
 import axios from "axios";
 
 const Register = () => {
@@ -9,34 +10,29 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-
-  const [message, setMessage] = useState(""); // Untuk pesan sukses/gagal
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // Untuk redirect setelah berhasil
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validasi sederhana
     if (formData.password !== formData.confirmPassword) {
-      setMessage("Password dan Konfirmasi Password tidak cocok.");
+      setMessage("Passwords do not match!");
       return;
     }
 
     try {
-      // Kirim data ke backend
       const response = await axios.post(
         "http://localhost:5000/api/register",
         formData
       );
-      setMessage(response.data.message || "Registrasi berhasil!");
+      setMessage("Registration successful!");
+      setTimeout(() => navigate("/login"), 2000); // Redirect ke login setelah 2 detik
     } catch (error) {
-      setMessage(
-        error.response?.data?.message || "Terjadi kesalahan pada server."
-      );
+      setMessage(error.response?.data?.message || "Registration failed!");
     }
   };
 
@@ -52,7 +48,6 @@ const Register = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter your name"
             required
           />
         </div>
@@ -63,7 +58,6 @@ const Register = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter your email"
             required
           />
         </div>
@@ -74,7 +68,6 @@ const Register = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Enter your password"
             required
           />
         </div>
@@ -85,17 +78,16 @@ const Register = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            placeholder="Confirm your password"
             required
           />
         </div>
         <button type="submit">Register</button>
       </form>
+      <p>
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 };
-
-  
-
 
 export default Register;
