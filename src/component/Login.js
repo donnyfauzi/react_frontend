@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/registerLogin.css'
 import axios from "axios";
@@ -26,10 +26,14 @@ const Login = () => {
           withCredentials: true, // Jika backend menggunakan cookie untuk sesi
         }
       );
-      setMessage("Login successful!");
+
+      // Simpan token di localStorage
+      localStorage.setItem("token", response.data.token);
+      
+      setMessage(response.data.message);
       setTimeout(() => navigate("/dashboard"), 2000); // Redirect ke dashboard setelah 2 detik
     } catch (error) {
-      setMessage(error.response?.data?.message || "Login failed!");
+      setMessage(error.response?.data?.message)
     }
   };
 
