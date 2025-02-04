@@ -41,11 +41,11 @@ a:hover {
 /* Form Container */
 .login-container, .register-container {
   background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
+  padding: 4rem;
+  border-radius: 17px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 form {
@@ -114,6 +114,34 @@ p {
     padding: 12px;
     font-size: 18px;
   }
+}
+
+/* Posisi ikon mata di dalam input */
+.form-group {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 68%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+}
+
+.eye-icon:hover {
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 35px; /* Beri ruang untuk ikon mata */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 
