@@ -4,7 +4,7 @@ import "../styles/registerLogin.css";
 import axios from "axios";
 
 import { ReactNotifications, Store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css"; // Import style-nya
+import "react-notifications-component/dist/theme.css" // Import style-nya
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -48,14 +48,10 @@ const Register = () => {
 
       handleShowNotification("success", response.data.message);
 
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000); // Redirect setelah 3 detik
+      setTimeout(() => { navigate("/login") }, 3000) // Redirect setelah 3 detik
+      
     } catch (error) {
-      handleShowNotification(
-        "danger",
-        error.response?.data?.message || "Something went wrong!"
-      );
+      handleShowNotification("danger", error.response?.data?.message || "Something went wrong!")
     }
   };
 
