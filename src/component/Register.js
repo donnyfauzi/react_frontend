@@ -40,7 +40,7 @@ const Register = () => {
     e.preventDefault()
 
     if (formData.password !== formData.confirmPassword) {
-      handleShowNotification('danger', 'Passwords do not match!')
+      handleShowNotification('danger', 'Passwords tidak cocok!')
       return;
     }
 
