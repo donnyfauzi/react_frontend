@@ -54,7 +54,7 @@ const Login = () => {
       setTimeout(() => navigate('/dashboard'), 2000); // Redirect ke dashboard setelah 2 detik
 
     } catch (error) {
-      handleShowNotification('warning', error.response?.data?.message)
+      handleShowNotification('danger', error.response?.data?.message)
     }
   }
 
