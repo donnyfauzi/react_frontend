@@ -1,21 +1,17 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Register from './component/Register'
-import Login from './component/Login'
 import Dashboard from './component/Dashboard'
-import ProtectedRoute from './component/ProtectedRute'
-
+import EditArticle from './component/EditArticle';
+import TabTrashed from './component/TabTrashed';
+import AddArticle from "./component/AddArticle";
 
 const App = () => {
     return (
       <Routes>
-        <Route path='/' element={<Login />} /> {/* Rute utama untuk Login */}
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        {/* Rute yang dilindungi, hanya bisa diakses jika user login */}
-        <Route element={<ProtectedRoute />}>
-          <Route path='/dashboard' element={<Dashboard />} />
-        </Route>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/edit-article/:id' element={<EditArticle />} />
+        <Route path='/trashed-articles' element={<TabTrashed />} />
+        <Route path='/add-article' element={<AddArticle />} />
       </Routes>
     )
 }
