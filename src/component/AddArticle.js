@@ -47,7 +47,7 @@ const AddArticle = () => {
   return (
     <div className="form-add-new">
       <form onSubmit={handleSubmit}>
-        <h2>Tambah Artikel Baru</h2>
+        <h2>Booking Ruang Rapat</h2>
         <div>
           <label htmlFor="unit">Unit</label>
           <input
