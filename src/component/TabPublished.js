@@ -1,88 +1,63 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react';
 
 const TabPublished = () => {
-  const [articles, setArticles] = useState([])
-  const navigate = useNavigate()
+  const [meetings, setMeetings] = useState([]);
 
   useEffect(() => {
-    fetch('https://apisvi.dofazcode.id/api/getArticle?status=published')
-    .then((response) => response.json())
-    .then((data) => {
-      setArticles(data.newArticle[0]);
-    })
-    .catch((error) =>
-      console.error('Error fetching published articles:', error)
-    )
-  }, [])
-
-  const handleEdit = (id) => {
-    navigate(`/edit-article/${id}`)
-  }
-
-  const handleTrash = (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this article?')
-
-     if (confirmDelete) {
-       
-    fetch(`http://localhost:5000/api/deleteArticle/${id}`, {method: 'DELETE',})
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to delete article.')
-        }
-        return response.json();
-      })
+    fetch('http://localhost:8080/api/checklist')
+      .then((response) => response.json())
       .then((data) => {
-        console.log('Delete Response Data:', data)
-        if (data.message) {
-          alert(data.message)
-          
-          setArticles((prevArticles) =>
-            prevArticles.filter((article) => article.id !== id)
-          );
+        console.log("Data dari API:", data); 
+        if (Array.isArray(data.checklists)) {
+          setMeetings(data.checklists); 
         } else {
-          console.error('No message in response:', data)
+          console.error('Data tidak sesuai format yang diharapkan:', data);
         }
       })
-      .catch((error) => {
-        console.error('Error deleting article:', error)
-        alert('Failed to delete article.')
-      })
-    }
-   }
+      .catch((error) =>
+        console.error('Error fetching meetings:', error)
+      );
+  }, []);
 
   return (
     <div>
-      <h2>Published Articles</h2>
-      <table>
+      <h2>Data Meeting</h2>
+      <table border="1">
         <thead>
           <tr>
             <th>No</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Unit</th>
+            <th>Ruang Meeting</th>
+            <th>Tanggal Rapat</th>
+            <th>Waktu Mulai</th>
+            <th>Waktu Selesai</th>
+            <th>Jumlah Peserta</th>
+            <th>Jenis Konsumsi</th>
           </tr>
         </thead>
         <tbody>
-          {articles.map((article, index) => (
-            <tr key={article.id}>
-              <td>{index + 1}</td>
-              <td>{article.title}</td>
-              <td>{article.content}</td>
-              <td>{article.category}</td>
-              <td>{article.status}</td>
-              <td>
-                <button className='button button-edit' onClick={() => handleEdit(article.id)}><i className='fas fa-edit'></i>Edit</button>
-                <button className='button button-trash' onClick={() => handleTrash(article.id)}><i className='fas fa-trash-alt'></i> Trash</button>
-              </td>
+          {meetings.length > 0 ? (
+            meetings.map((meeting, index) => (
+              <tr key={meeting.id}>
+                <td>{index + 1}</td>
+                <td>{meeting.unit}</td>
+                <td>{meeting.ruang_meeting}</td>
+                <td>{new Date(meeting.tanggal_rapat).toLocaleDateString('id-ID')}</td>
+                <td>{meeting.waktu_mulai}</td>
+                <td>{meeting.waktu_selesai}</td>
+                <td>{meeting.jumlah_peserta}</td>
+                <td>{meeting.jenis_konsumsi}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="8">Tidak ada data yang tersedia.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default TabPublished
+export default TabPublished;
