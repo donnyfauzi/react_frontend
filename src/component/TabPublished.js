@@ -21,7 +21,7 @@ const TabPublished = () => {
 
   return (
     <div>
-      <h2>Data Meeting</h2>
+      <h2>Data Ruang Meeting</h2>
       <table border="1">
         <thead>
           <tr>
