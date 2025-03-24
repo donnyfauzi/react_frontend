@@ -15,9 +15,7 @@ const Dashboard = () => {
   return (
     <div className='container'>
       <h1 className='title'>Dashboard</h1>
-      <button className='button button-add-new' onClick={handleAddNew}>
-        Booking Ruang Rapat
-      </button>
+      <button className='button button-add-new' onClick={handleAddNew}> + Booking Ruang Rapat</button>
 
       {/* Konten Tab */}
       <div className='tab-content'>
