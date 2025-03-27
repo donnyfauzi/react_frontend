@@ -4,7 +4,7 @@ import TabPublished from './TabPublished'
 import '../styles.css'
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('Published')
+  const [activeTab] = useState('Published')
    const navigate = useNavigate();
 
 
